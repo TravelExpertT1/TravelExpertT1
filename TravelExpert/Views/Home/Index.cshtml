@@ -1,0 +1,121 @@
+﻿@model IEnumerable<TravelExpert.Models.Package>
+
+@{ ViewData["Title"] = "Home - Available Packages"; }
+
+<h1>Welcome to Travel Experts Vacation Planning!</h1>
+
+
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PkgName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PkgStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PkgEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PkgBasePrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.PkgName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PkgStartDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PkgEndDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PkgBasePrice)
+    </td>
+    <td>
+
+        <a asp-action="Details" asp-route-id="@item.PackageId">View Details</a>
+
+    </td>
+</tr>}
+    </tbody>
+</table>*@
+
+@foreach (var item in Model) { 
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card text-center" style="width: 30rem;">
+            <div class="card-header">
+                @Html.DisplayFor(modelItem => item.PkgName)
+            </div>
+            <img src="/Images/1.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.PkgDesc)</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.PkgBasePrice)</h6>
+                    <a asp-action="Details" asp-route-id="@item.PackageId" class="btn btn-primary">See Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+    @*<div class="col-sm-6">
+        <div class="card text-center" style="width: 30rem;">
+            <div class="card-header">
+                Featured
+            </div>
+            <img src="/Images/2.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card text-center" style="width: 30rem;">
+            <div class="card-header">
+                Featured
+            </div>
+            <img src="~/Images/3.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card text-center" style="width: 30rem;">
+            <div class="card-header">
+                Featured
+            </div>
+            <img src="~/Images/4.jpg" runat="server" class="card-img-top" alt="...">
+            <div class="card-body">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
