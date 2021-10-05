@@ -1,0 +1,9 @@
+﻿.tools
+
+
+Scaffold-DbContext "Data Source=.;Initial Catalog=TravelExperts;Integrated Security=True" -Provider Microsoft.EntityFrameworkCore.SqlServer -OutputDir "Models" -Context "TravelExpertsContext" -d-Force
+
+Add Data layer from Book and delete context file - update namespaces
+
+
+

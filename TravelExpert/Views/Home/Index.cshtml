@@ -1,0 +1,72 @@
+﻿@model IEnumerable<TravelExpert.Models.Package>
+
+@{ ViewData["Title"] = "Home - Available Packages"; }
+
+<h1>Welcome to Travel Experts Vacation Planning!</h1>
+
+
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PkgName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PkgStartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PkgEndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PkgBasePrice)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PkgName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PkgStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PkgEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PkgBasePrice)
+        </td>
+        <td>
+
+            <a asp-action="Details" asp-route-id="@item.PackageId">View Details</a>
+
+        </td>
+    </tr>}
+        </tbody>
+    </table>*@
+<div class="container-fluid">
+    <div class="row row-cols-1 row-cols-md-2">
+        @foreach (var item in Model)
+        {
+
+<div class="col-sm-6  d-flex">
+    <div class="card text-center" style="width: 35rem; height: 40rem" >
+        <div class="card-header">
+            <h5>@Html.DisplayFor(modelItem => item.PkgName)</h5>
+        </div>
+        
+            <img src="\Images\@(item.PackageId + ".jpg")" class="card-img-top img-fluid" style="width:auto; height: 25rem">
+            <div class="card-body">
+                <div class="card-body">
+                    <p class="card-title">@Html.DisplayFor(modelItem => item.PkgDesc)</p>
+                    <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.PkgBasePrice)</h6>
+                    <a asp-action="Details" asp-route-id="@item.PackageId" class="btn btn-primary">See Details</a>
+                </div>
+            </div>
+        </div>
+    </div>      }
+    </div>
+</div>
