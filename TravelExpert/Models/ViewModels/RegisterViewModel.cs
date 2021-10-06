@@ -4,8 +4,11 @@ namespace TravelExpert.Models
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Please enter a username.")]
-        [StringLength(255)]
+        // [Required(ErrorMessage = "Please enter a username.")]
+        //  [StringLength(255)]
+        [Required(ErrorMessage = "Please enter an email address.")]
+        [DataType(DataType.EmailAddress)]
+
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Please enter a first name.")]
@@ -16,10 +19,10 @@ namespace TravelExpert.Models
         [StringLength(255)]
         public string Lastname { get; set; }
 
-        [Required(ErrorMessage = "Please enter an email address.")]
+      /* [Required(ErrorMessage = "Please enter an email address.")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
+      */
         [Required(ErrorMessage = "Please enter a password.")]
         [DataType(DataType.Password)]
         [Compare("ConfirmPassword")]

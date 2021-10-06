@@ -21,7 +21,9 @@ namespace TravelExpert.Models
         [Required]
         [StringLength(50)]
         public string PkgName { get; set; }
+
         [Column(TypeName = "datetime")]
+        [DisplayFormat(DataFormatString = "{dd-MMM-yyyy}")]
         public DateTime? PkgStartDate { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? PkgEndDate { get; set; }

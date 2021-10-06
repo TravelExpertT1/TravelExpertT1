@@ -40,6 +40,7 @@ namespace TravelExpert.Models
         public string CustHomePhone { get; set; }
         [StringLength(20)]
         public string CustBusPhone { get; set; }
+
         [Required]
         [StringLength(50)]
         public string CustEmail { get; set; }

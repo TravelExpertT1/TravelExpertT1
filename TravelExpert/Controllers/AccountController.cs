@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using TravelExpert.Models;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace TravelExpert.Controllers
 {
@@ -9,12 +12,19 @@ namespace TravelExpert.Controllers
     {
         private UserManager<User> userManager;
         private SignInManager<User> signInManager;
+        //Tom added:
+        private TravelExpertsContext data;
+
+
 
         public AccountController(UserManager<User> userMngr,
-            SignInManager<User> signInMngr)
+            SignInManager<User> signInMngr,
+          //Tom added:
+            TravelExpertsContext rep)
         {
             userManager = userMngr;
             signInManager = signInMngr;
+            data = rep;
         }
 
         [HttpGet]
@@ -32,13 +42,28 @@ namespace TravelExpert.Controllers
                     UserName = model.Username,
                     Firstname = model.Firstname,
                     Lastname = model.Lastname,
-                    Email = model.Email
+                    //Email = model.Username
                 };
                 var result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent : false);
+                   
+                    //Tom: Create new customer and save in Customer table in db 
+                    var NewCustomer = new Customer();
+                    NewCustomer.CustFirstName = model.Firstname;
+                    NewCustomer.CustLastName = model.Lastname;
+                    NewCustomer.CustEmail = model.Username;
+                    data.Customers.Update(NewCustomer);
+                    data.SaveChanges();
+
+                    //Tom:Find and Add CustomerID to session
+                    List<Customer> listCustomers;
+                    listCustomers = data.Customers.ToList();
+                    NewCustomer = listCustomers.Find(x => x.CustEmail == model.Username);
+                    HttpContext.Session.SetInt32("CustomerId", NewCustomer.CustomerId);
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -56,6 +81,8 @@ namespace TravelExpert.Controllers
         public async Task<IActionResult> LogOut()
         {
             await signInManager.SignOutAsync();
+            //Tom Added: Deleted Session (CustomerId)
+            HttpContext.Session.Remove("CustomerId");
             return RedirectToAction("Index", "Home");
         }
 
@@ -77,6 +104,15 @@ namespace TravelExpert.Controllers
 
                 if (result.Succeeded)
                 {
+
+                    //Tom:Find and Add CustomerID to session
+                    var NewCustomer = new Customer();
+                    List<Customer> listCustomers;
+                    listCustomers = data.Customers.ToList();
+                    NewCustomer = listCustomers.Find(x => x.CustEmail == model.Username);
+                    HttpContext.Session.SetInt32("CustomerId", NewCustomer.CustomerId);
+
+
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && 
                         Url.IsLocalUrl(model.ReturnUrl))
                     {
