@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using TravelExpert.Data;
 using TravelExpert.Models;
 
 namespace TravelExpert.Controllers
@@ -13,22 +14,15 @@ namespace TravelExpert.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly TravelExpertsContext _context;
 
-       //public HomeController(ILogger<HomeController> logger)
-       // {
-       //     _logger = logger;
-       // }
-
-        public HomeController(TravelExpertsContext context)
+        public HomeController(ILogger<HomeController> logger)
         {
-            _context = context;
+            _logger = logger;
         }
 
         public IActionResult Index()
         {
-            List<Package> packages = _context.Packages.ToList();
-            return View(packages);
+            return View();
         }
 
         public IActionResult Privacy()
