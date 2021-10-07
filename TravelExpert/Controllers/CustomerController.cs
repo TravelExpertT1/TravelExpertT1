@@ -28,13 +28,13 @@ namespace TravelExpert.Controllers
             int CustomerID = (int)HttpContext.Session.GetInt32("CustomerId");
             //int w = 1;
 
-            var travelExpertsContext = _context.Bookings.Include(b => b.Customer).Include(b => b.Package).Include(b => b.TripType);
-            int w = 1;
+          //  var travelExpertsContext = _context.Bookings.Include(b => b.Customer).Include(b => b.Package).Include(b => b.TripType);
+          //  int w = 1;
 
            
 
-            List<Booking> listBookings;
-            listBookings = _context.Bookings.ToList();
+          //  List<Booking> listBookings;
+          //  listBookings = _context.Bookings.ToList();
 
             var model = from x in _context.Bookings.ToList()
                         join y in _context.Packages.ToList() on x.PackageId equals y.PackageId
@@ -107,9 +107,19 @@ namespace TravelExpert.Controllers
                 return NotFound();
             }
 
+
+            var model = from x in _context.Bookings.ToList()
+                        join y in _context.Packages.ToList() on x.PackageId equals y.PackageId
+                        where (int)x.BookingId == id
+                        select new ViewModelCustBook { booking = x, package = y };
+
+
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustEmail", booking.CustomerId);
             ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName", booking.PackageId);
             ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId", booking.TripTypeId);
+
+            ViewData["Package"] = model;//new SelectList(_context.Packages, "TripTypeId", "TripTypeId", booking.PackageId);
+
             return View(booking);
         }
 
