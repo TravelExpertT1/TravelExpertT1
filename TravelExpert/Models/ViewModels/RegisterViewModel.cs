@@ -6,10 +6,19 @@ namespace TravelExpert.Models
     {
         // [Required(ErrorMessage = "Please enter a username.")]
         //  [StringLength(255)]
+        
+        
         [Required(ErrorMessage = "Please enter an email address.")]
-        [DataType(DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Please enter a valid email address.")]
+        [StringLength(51, ErrorMessage = "The email address must not be less than 51 characters.")]
 
         public string Username { get; set; }
+
+
+
+
+
+
 
         [Required(ErrorMessage = "Please enter a first name.")]
         [StringLength(255)]

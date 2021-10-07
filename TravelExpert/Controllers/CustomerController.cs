@@ -34,7 +34,7 @@ namespace TravelExpert.Controllers
            
 
           //  List<Booking> listBookings;
-          //  listBookings = _context.Bookings.ToList();
+           // listBookings = _context.Bookings.ToList();
 
             var model = from x in _context.Bookings.ToList()
                         join y in _context.Packages.ToList() on x.PackageId equals y.PackageId
@@ -118,9 +118,9 @@ namespace TravelExpert.Controllers
             ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName", booking.PackageId);
             ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId", booking.TripTypeId);
 
-            ViewData["Package"] = model;//new SelectList(_context.Packages, "TripTypeId", "TripTypeId", booking.PackageId);
+           // ViewData["Package"] = model;//new SelectList(_context.Packages, "TripTypeId", "TripTypeId", booking.PackageId);
 
-            return View(booking);
+            return View(model);
         }
 
         // POST: Customer/Edit/5
