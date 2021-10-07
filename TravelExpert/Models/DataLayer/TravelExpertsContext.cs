@@ -309,7 +309,8 @@ namespace TravelExpert.Models
                 RoleManager<IdentityRole> roleManager = (RoleManager<IdentityRole>)
                     scope.ServiceProvider.GetService(typeof(RoleManager<IdentityRole>));
 
- //Admin login credentials           
+ //Admin login credentials
+ //comment2
                 
                 string username = "admin";
                 string password = "admin";
