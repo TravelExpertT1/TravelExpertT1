@@ -94,6 +94,6 @@ namespace TravelExpert
 
             TravelExpertsContext.CreateAdminUser(app.ApplicationServices).Wait();
         }
-        }
     }
+}
 

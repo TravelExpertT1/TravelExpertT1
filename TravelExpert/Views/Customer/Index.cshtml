@@ -1,0 +1,67 @@
+﻿@model IEnumerable<TravelExpert.Models.ViewModelCustBook>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Your bookings:</h1>
+
+<p>
+    <a class="btn btn-info" asp-controller="Home" asp-action="Index">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Package Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Start date
+            </th>
+            <th>
+                End date
+            </th>
+            <th>
+                Travelers
+            </th>
+            <th>
+                Price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.package.PkgName
+                </td>
+                <td>
+                    @item.package.PkgDesc
+                </td>
+                <td>
+                    @item.package.PkgStartDate.ToString().Substring(0, 10)
+                </td>
+                <td>
+                    @item.package.PkgEndDate.ToString().Substring(0,10)
+                </td>
+                <td>
+                    @item.booking.TravelerCount
+                </td>
+                <td>
+                    @item.package.PkgBasePrice
+                </td>
+                <td>@if (item.package.PkgStartDate > DateTime.Now)
+                {
+                    <a class="btn btn-info"  asp-action="Edit" asp-route-id="@item.booking.BookingId">Change</a> 
+                    <a class="btn btn-info"  asp-action = "Delete" asp-route-id = "@item.booking.BookingId">Delete</a>
+                 }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

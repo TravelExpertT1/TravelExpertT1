@@ -26,6 +26,11 @@
     <None Include="Views\Account\AccessDenied.cshtml" />
     <None Include="Views\Account\Login.cshtml" />
     <None Include="Views\Account\Register.cshtml" />
+    <None Include="Views\Customer\Create.cshtml" />
+    <None Include="Views\Customer\Delete.cshtml" />
+    <None Include="Views\Customer\Details.cshtml" />
+    <None Include="Views\Customer\Edit.cshtml" />
+    <None Include="Views\Customer\Index.cshtml" />
   </ItemGroup>
 
 </Project>
