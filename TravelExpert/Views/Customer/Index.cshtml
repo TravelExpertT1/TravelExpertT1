@@ -6,9 +6,7 @@
 
 <h1>Your bookings:</h1>
 
-<p>
-    <a class="btn btn-info" asp-controller="Home" asp-action="Index">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -47,13 +45,14 @@
                     @item.package.PkgStartDate.ToString().Substring(0, 10)
                 </td>
                 <td>
-                    @item.package.PkgEndDate.ToString().Substring(0,10)
+                    @item.package.PkgEndDate.ToString().Substring(0, 10)
                 </td>
                 <td>
                     @item.booking.TravelerCount
                 </td>
                 <td>
-                    @item.package.PkgBasePrice
+                    @{var i = (decimal)item.booking.TravelerCount * item.package.PkgBasePrice; }
+                    @i.ToString("c")
                 </td>
                 <td>@if (item.package.PkgStartDate > DateTime.Now)
                 {
@@ -65,3 +64,6 @@
         }
     </tbody>
 </table>
+<p>
+    <a class="btn btn-info" asp-controller="Home" asp-action="Index">Home</a>
+</p>

@@ -39,6 +39,7 @@ namespace TravelExpert.Controllers
             var model = from x in _context.Bookings.ToList()
                         join y in _context.Packages.ToList() on x.PackageId equals y.PackageId
                         where (int)x.CustomerId == CustomerID
+                        orderby y.PkgStartDate
                         select new ViewModelCustBook { booking = x, package = y };
 
             return View(model);
@@ -111,16 +112,17 @@ namespace TravelExpert.Controllers
             var model = from x in _context.Bookings.ToList()
                         join y in _context.Packages.ToList() on x.PackageId equals y.PackageId
                         where (int)x.BookingId == id
+                        
                         select new ViewModelCustBook { booking = x, package = y };
+           // var booking = await _context.Bookings.FindAsync(id);
+
+            //  ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustEmail", booking.CustomerId);
+            // ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName", booking.PackageId);
+            //  ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId", booking.TripTypeId);
 
 
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustEmail", booking.CustomerId);
-            ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName", booking.PackageId);
-            ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId", booking.TripTypeId);
 
-           // ViewData["Package"] = model;//new SelectList(_context.Packages, "TripTypeId", "TripTypeId", booking.PackageId);
-
-            return View(model);
+            return View(booking);
         }
 
         // POST: Customer/Edit/5
@@ -128,23 +130,29 @@ namespace TravelExpert.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookingId,BookingDate,BookingNo,TravelerCount,CustomerId,TripTypeId,PackageId")] Booking booking)
+        //public async Task<IActionResult> Edit(int id, [Bind("BookingId,BookingDate,BookingNo,TravelerCount,CustomerId,TripTypeId,PackageId")] Booking booking)
+
+       public async Task<IActionResult> Edit(int id, Booking booking)
         {
-            if (id != booking.BookingId)
-            {
-                return NotFound();
-            }
+
+            var newbooking = await _context.Bookings.FindAsync(id);
+            newbooking.TravelerCount = booking.TravelerCount;
+            
+            //if (id != booking.BookingId)
+           // {
+           //     return NotFound();
+           // }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(booking);
+                    _context.Update(newbooking);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookingExists(booking.BookingId))
+                    if (!BookingExists(newbooking.BookingId))
                     {
                         return NotFound();
                     }
@@ -153,11 +161,12 @@ namespace TravelExpert.Controllers
                         throw;
                     }
                 }
+                //var i = 1;
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustEmail", booking.CustomerId);
-            ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName", booking.PackageId);
-            ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId", booking.TripTypeId);
+         //   ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustEmail", booking.CustomerId);
+          //  ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName", booking.PackageId);
+         //   ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId", booking.TripTypeId);
             return View(booking);
         }
 
@@ -189,6 +198,17 @@ namespace TravelExpert.Controllers
         {
             var booking = await _context.Bookings.FindAsync(id);
             _context.Bookings.Remove(booking);
+
+            /*
+            var model = from x in _context.Bookings.ToList()
+                        join y in _context.BookingDetails.ToList() on x.BookingId equals y.PackageId
+                        where (int)x.CustomerId == CustomerID
+                        select new ViewModelCustBook { booking = x, package = y };
+
+
+
+            var delBookingdetails = await _context.Bookings.FindAsync(id);
+            */
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

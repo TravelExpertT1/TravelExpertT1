@@ -13,8 +13,11 @@ namespace TravelExpert.Models
     [Index(nameof(PackageId), Name = "PackageId")]
     [Index(nameof(PackageId), Name = "PackagesBookings")]
     [Index(nameof(TripTypeId), Name = "TripTypesBookings")]
+
+
     public partial class Booking
     {
+
         public Booking()
         {
             BookingDetails = new HashSet<BookingDetail>();
