@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,9 @@ namespace TravelExpert.Controllers
 
             var package = await _context.Packages
                 .FirstOrDefaultAsync(m => m.PackageId == id);
+            //Tom:
+            HttpContext.Session.SetInt32("PackageId", (int)id);
+
             if (package == null)
             {
                 return NotFound();

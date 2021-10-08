@@ -19,7 +19,9 @@
                 <p class="card-title">@Html.DisplayFor(modelItem => Model.PkgStartDate) - @Html.DisplayFor(modelItem => Model.PkgEndDate)</p>
                 <h6 class="card-subtitle mb-2 text-muted"> $ @Html.DisplayFor(modelItem => Model.PkgBasePrice)</h6>
                 <a asp-action="Index" asp-route-id="@Model.PackageId" class="btn btn-primary">Back to Packages</a>
-                <a asp-action="" class="btn btn-primary">Add Package to Cart</a>
+                
+                
+                <a asp-controller="Customer" asp-action="Create" class="btn btn-primary">Add Package to Cart</a>
                 <a asp-action="Edit" asp-route-id="@Model.PackageId" class="btn btn-primary">Edit</a>
             </div>
         </div>

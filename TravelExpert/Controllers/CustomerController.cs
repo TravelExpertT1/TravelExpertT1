@@ -67,6 +67,7 @@ namespace TravelExpert.Controllers
         }
 
         // GET: Customer/Create
+
         public IActionResult Create()
         {
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustEmail");
@@ -78,13 +79,23 @@ namespace TravelExpert.Controllers
         // POST: Customer/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BookingId,BookingDate,BookingNo,TravelerCount,CustomerId,TripTypeId,PackageId")] Booking booking)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(booking);
+                //Tom:
+                var NewBooking = new Booking(); 
+                NewBooking.TravelerCount = booking.TravelerCount;
+                NewBooking.CustomerId = (int)HttpContext.Session.GetInt32("CustomerId");
+                NewBooking.BookingDate = DateTime.Now;
+                NewBooking.PackageId = (int)HttpContext.Session.GetInt32("PackageId");
+
+
+
+                _context.Add(NewBooking);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
