@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<div class="container-fluid">
 <h1>Our Locations:</h1>
 
 
@@ -15,84 +15,84 @@
         <div class="row g-0">
 
             <div class="col-md-4">
-                <img src="~/Images/2.jpg" class="img-fluid rounded-start" alt="...">
+                <img src="\Images\AgencyImages\@(item.AgencyId + ".jpg")" class="card-img-top img-fluid" style="width:14rem; height: 12rem">
             </div>
-                <div class="col-md-8">
-                    <div class="card-body text-center">
-                      
-                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.AgncyCity) Location:</h5>
-                                <h6>@Html.DisplayFor(modelItem => item.AgncyAddress) </h6>
-                                <h6>@Html.DisplayFor(modelItem => item.AgncyCity), @Html.DisplayFor(modelItem => item.AgncyCountry)</h6>
-                                <h6>PH:@Html.DisplayFor(modelItem => item.AgncyPhone) F:@Html.DisplayFor(model => item.AgncyFax)</h6>
-                    </div>
+            <div class="col-md-8">
+                <div class="card-body text-center">
+
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.AgncyCity) Location:</h5>
+                    <h6>@Html.DisplayFor(modelItem => item.AgncyAddress) </h6>
+                    <h6>@Html.DisplayFor(modelItem => item.AgncyCity), @Html.DisplayFor(modelItem => item.AgncyCountry)</h6>
+                    <h6>PH:@Html.DisplayFor(modelItem => item.AgncyPhone) F:@Html.DisplayFor(model => item.AgncyFax)</h6>
+                </div>
             </div>
         </div>
-        </div>
+    </div>
 }
 
-
+</div>
 
 @*<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AgncyAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AgncyCity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AgncyProv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AgncyPostal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AgncyCountry)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AgncyPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AgncyFax)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AgncyAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AgncyCity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AgncyProv)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AgncyPostal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AgncyCountry)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AgncyPhone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AgncyFax)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.AgencyId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.AgencyId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.AgencyId">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgncyAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgncyCity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgncyProv)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgncyPostal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgncyCountry)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgncyPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgncyFax)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>*@
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgncyAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgncyCity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgncyProv)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgncyPostal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgncyCountry)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgncyPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgncyFax)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.AgencyId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.AgencyId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.AgencyId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
