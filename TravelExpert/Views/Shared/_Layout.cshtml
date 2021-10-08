@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@{ //Tom add all this razor expresion.needed fo activation of links
+    string controller =
+        ViewContext.RouteData.Values["controller"].ToString();
+    string action =
+        ViewContext.RouteData.Values["action"].ToString();
+}
+
+
+
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,13 +32,18 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link @(controller == "Home" ? "active" : "")" asp-area=""
+                               asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link @(controller == "Contact" ? "active"  : "")" asp-area="" asp-controller="Contact" asp-action="Index">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Index">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Manage Bookings</a>
+                            <a class="nav-link @(controller == "Customer" ? "active" : "")" asp-area="" asp-controller="Customer" asp-action="Index">Manage Bookings</a>
                         </li>
 
                     </ul>
@@ -84,7 +101,7 @@
             &copy; 2021 - TravelExpert - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-      
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
