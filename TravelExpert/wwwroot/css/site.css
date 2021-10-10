@@ -1,26 +1,11 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-/*Susan*/
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items:center;
-    padding: 30px 10%;
-}
 
-/*Susan*/
-/*.logo{
-    cursor: pointer;
-}*/
-
-/*Susan*/
-
-  a .navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-  font-family: cursive;
+h1{
+    text-align:center;
+    color:cadetblue;
+    font-family: cursive
 }
 
 /* Provide sufficient contrast against white background */

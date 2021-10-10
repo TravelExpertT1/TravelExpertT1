@@ -26,16 +26,6 @@ namespace TravelExpert.Controllers
         public async Task<IActionResult> Index()
         {
             int CustomerID = (int)HttpContext.Session.GetInt32("CustomerId");
-            //int w = 1;
-
-          //  var travelExpertsContext = _context.Bookings.Include(b => b.Customer).Include(b => b.Package).Include(b => b.TripType);
-          //  int w = 1;
-
-           
-
-          //  List<Booking> listBookings;
-           // listBookings = _context.Bookings.ToList();
-
             var model = from x in _context.Bookings.ToList()
                         join y in _context.Packages.ToList() on x.PackageId equals y.PackageId
                         where (int)x.CustomerId == CustomerID
@@ -86,14 +76,12 @@ namespace TravelExpert.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Tom:
+                //Tom Create new booking in db:
                 var NewBooking = new Booking(); 
                 NewBooking.TravelerCount = booking.TravelerCount;
                 NewBooking.CustomerId = (int)HttpContext.Session.GetInt32("CustomerId");
                 NewBooking.BookingDate = DateTime.Now;
                 NewBooking.PackageId = (int)HttpContext.Session.GetInt32("PackageId");
-
-
 
                 _context.Add(NewBooking);
                 await _context.SaveChangesAsync();
@@ -125,14 +113,6 @@ namespace TravelExpert.Controllers
                         where (int)x.BookingId == id
                         
                         select new ViewModelCustBook { booking = x, package = y };
-           // var booking = await _context.Bookings.FindAsync(id);
-
-            //  ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustEmail", booking.CustomerId);
-            // ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName", booking.PackageId);
-            //  ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId", booking.TripTypeId);
-
-
-
             return View(booking);
         }
 
@@ -141,7 +121,6 @@ namespace TravelExpert.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("BookingId,BookingDate,BookingNo,TravelerCount,CustomerId,TripTypeId,PackageId")] Booking booking)
 
        public async Task<IActionResult> Edit(int id, Booking booking)
         {
@@ -149,11 +128,6 @@ namespace TravelExpert.Controllers
             var newbooking = await _context.Bookings.FindAsync(id);
             newbooking.TravelerCount = booking.TravelerCount;
             
-            //if (id != booking.BookingId)
-           // {
-           //     return NotFound();
-           // }
-
             if (ModelState.IsValid)
             {
                 try
@@ -175,9 +149,6 @@ namespace TravelExpert.Controllers
                 //var i = 1;
                 return RedirectToAction(nameof(Index));
             }
-         //   ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustEmail", booking.CustomerId);
-          //  ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName", booking.PackageId);
-         //   ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId", booking.TripTypeId);
             return View(booking);
         }
 
@@ -209,17 +180,6 @@ namespace TravelExpert.Controllers
         {
             var booking = await _context.Bookings.FindAsync(id);
             _context.Bookings.Remove(booking);
-
-            /*
-            var model = from x in _context.Bookings.ToList()
-                        join y in _context.BookingDetails.ToList() on x.BookingId equals y.PackageId
-                        where (int)x.CustomerId == CustomerID
-                        select new ViewModelCustBook { booking = x, package = y };
-
-
-
-            var delBookingdetails = await _context.Bookings.FindAsync(id);
-            */
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

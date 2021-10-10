@@ -15,8 +15,6 @@ namespace TravelExpert.Controllers
         //Tom added:
         private TravelExpertsContext data;
 
-
-
         public AccountController(UserManager<User> userMngr,
             SignInManager<User> signInMngr,
             //Tom added:
@@ -43,8 +41,6 @@ namespace TravelExpert.Controllers
                     UserName = model.Username,
                     Firstname = model.Firstname,
                     Lastname = model.Lastname,
-                    //Tom:
-                    //Email = model.Username
                 };
                 var result = await userManager.CreateAsync(user, model.Password);
 
@@ -113,7 +109,6 @@ namespace TravelExpert.Controllers
                     listCustomers = data.Customers.ToList();
                     NewCustomer = listCustomers.Find(x => x.CustEmail == model.Username);
                     HttpContext.Session.SetInt32("CustomerId", NewCustomer.CustomerId);
-
 
                     if (!string.IsNullOrEmpty(model.ReturnUrl) &&
                         Url.IsLocalUrl(model.ReturnUrl))
